@@ -1,6 +1,6 @@
 import Sequelize from 'sequelize'
 
-import sequelize from '../database/sequelize'
+import sequelize from '../services/sequelize'
 
 const Flight = sequelize.define('flight', {
   id: {
