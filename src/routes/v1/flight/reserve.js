@@ -90,6 +90,14 @@ router.post('/', async (req, res) => {
         }
 
         await Flight.update(payload, {where: {eventID: body.event.id, flightID: body.flight.id}})
+
+        return res.status(200).send({
+          status: 'success',
+          code: 201,
+          response: {
+            message: 'Flight reserved',
+          },
+        })
       }
     }
   }
