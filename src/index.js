@@ -2,6 +2,7 @@ import express from 'express'
 import dotenv from 'dotenv'
 import cors from 'cors'
 import bodyParser from 'body-parser'
+import chalk from 'chalk'
 
 import indexRoute from './routes/indexRoute'
 
@@ -16,10 +17,6 @@ server.use(bodyParser.json())
 server.use(bodyParser.urlencoded({extended: true}))
 
 server.use(cors())
-
-server.use(passport.initialize())
-server.use(passport.session())
-passportService(passport)
 
 server.use((req, res, next) => {
   res.setHeader('X-Powered-By', 'rayriffy')
