@@ -1,14 +1,13 @@
 import express from 'express'
 
-import eventRoutes from './eventRoutes'
-
 const router = express.Router()
 
 router.get('/', (req, res) => {
   res.status(200).send({
     status: 'success',
+    code: 201,
     response: {
-      message: 'healthy',
+      message: 'hi from event',
     },
   })
 })
@@ -16,12 +15,11 @@ router.get('/', (req, res) => {
 router.all('/', (req, res) => {
   res.status(405).send({
     status: 'failure',
+    code: 705,
     response: {
       message: 'invalid method',
     },
   })
 })
-
-router.use('/event', eventRoutes)
 
 export default router

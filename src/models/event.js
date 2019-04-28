@@ -6,6 +6,7 @@ const Event = sequelize.define('event', {
   id: {
     type: Sequelize.STRING,
     allowNull: false,
+    unique: true,
   },
   eventName: {
     type: Sequelize.TEXT,
@@ -17,6 +18,9 @@ const Event = sequelize.define('event', {
   eventCover: {
     type: Sequelize.TEXT,
     allowNull: false,
+    validate: {
+      isUrl: true,
+    },
   },
   isOpen: {
     type: Sequelize.BOOLEAN,
