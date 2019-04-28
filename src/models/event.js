@@ -29,4 +29,6 @@ const Event = sequelize.define('event', {
   },
 })
 
+sequelize.sync()
+
 export default Event

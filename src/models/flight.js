@@ -37,4 +37,6 @@ const Flight = sequelize.define('flight', {
   },
 })
 
+sequelize.sync()
+
 export default Flight
