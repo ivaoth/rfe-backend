@@ -31,7 +31,18 @@ router.post('/', (req, res, next) => {
    * }
    */
 
-   if (!body.secret || !body.event || !body.flight || !body.flight.name || !body.flight.type || !body.flight.airport || !body.flight.airport.departure || !body.flight.airport.arrival || !body.flight.time || !body.flight.time.departure) {
+  if (
+    !body.secret ||
+    !body.event ||
+    !body.flight ||
+    !body.flight.name ||
+    !body.flight.type ||
+    !body.flight.airport ||
+    !body.flight.airport.departure ||
+    !body.flight.airport.arrival ||
+    !body.flight.time ||
+    !body.flight.time.departure
+  ) {
     return res.status(400).send({
       status: 'failure',
       code: 702,
@@ -78,7 +89,7 @@ router.post('/', async (req, res, next) => {
   }
 })
 
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
   const {body} = req
 
   const id = Math.random()
@@ -93,7 +104,7 @@ router.post('/', (req, res) => {
     flightAirpotDep: body.flight.airport.departure,
     flightAirportArr: body.flight.airport.arrival,
     flightTimeDep: body.flight.time.departure,
-    reserver: null
+    reserver: null,
   }
 
   try {

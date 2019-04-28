@@ -1,4 +1,3 @@
-import _ from 'lodash'
 import express from 'express'
 
 import Event from '../../../models/event'
@@ -21,7 +20,7 @@ router.get('/', async (req, res) => {
       id: row.eventID,
       name: row.eventName,
       desc: row.eventDesc,
-      cover:  row.eventCover,
+      cover: row.eventCover,
     })
   })
 
@@ -31,9 +30,9 @@ router.get('/', async (req, res) => {
     response: {
       message: 'data retrived',
       data: {
-        events: events
-      }
-    }
+        events: events,
+      },
+    },
   })
 })
 

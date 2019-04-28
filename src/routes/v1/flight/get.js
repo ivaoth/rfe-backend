@@ -19,7 +19,7 @@ router.get('/:evid/:id', async (req, res) => {
     time: {
       departure: row.flightTimeDep,
     },
-    reserved: reserver !== null,
+    reserved: row.reserverVID !== null,
   }
 
   res.status(200).send({
@@ -28,9 +28,9 @@ router.get('/:evid/:id', async (req, res) => {
     response: {
       message: 'data retrived',
       data: {
-        flight: payload
-      }
-    }
+        flight: payload,
+      },
+    },
   })
 })
 

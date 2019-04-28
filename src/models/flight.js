@@ -31,9 +31,30 @@ const Flight = sequelize.define('flight', {
     type: Sequelize.STRING,
     allowNull: false,
   },
-  reserver: {
-    type: Sequelize.JSON,
-    defaultValue: null,
+  reserverVID: {
+    type: Sequelize.STRING,
+    allowNull: true,
+    unique: true,
+  },
+  reserverFirstName: {
+    type: Sequelize.STRING,
+    allowNull: true,
+  },
+  reserverLastName: {
+    type: Sequelize.STRING,
+    allowNull: true,
+  },
+  reserverRatingPilot: {
+    type: Sequelize.STRING,
+    allowNull: true,
+  },
+  reserverRatingATC: {
+    type: Sequelize.STRING,
+    allowNull: true,
+  },
+  reserverDivision: {
+    type: Sequelize.STRING,
+    allowNull: true,
   },
 })
 

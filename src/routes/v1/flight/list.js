@@ -1,4 +1,3 @@
-import _ from 'lodash'
 import express from 'express'
 
 import Flight from '../../../models/flight'
@@ -24,9 +23,9 @@ router.get('/:evid/:page', async (req, res) => {
     response: {
       message: 'data retrived',
       data: {
-        flights: flights
-      }
-    }
+        flights: flights,
+      },
+    },
   })
 })
 
