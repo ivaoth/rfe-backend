@@ -60,7 +60,7 @@ router.post('/', async (req, res) => {
 
   const payload = {
     eventID: id,
-    eventName: body.event.namem,
+    eventName: body.event.name,
     eventDesc: body.event.desc,
     eventCover: body.event.cover,
     isOpen: false,
