@@ -59,7 +59,7 @@ router.post('/', async (req, res) => {
     .substring(2)
 
   const payload = {
-    id: id,
+    eventID: id,
     eventName: body.event.namem,
     eventDesc: body.event.desc,
     eventCover: body.event.cover,

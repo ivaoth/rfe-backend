@@ -7,7 +7,7 @@ const router = express.Router()
 router.get('/:evid/:id', async (req, res) => {
   const {evid, id} = req.params
 
-  const row = Flight.findOne({where: {event: evid, id: id}})
+  const row = Flight.findOne({where: {eventID: evid, flightID: id}})
 
   const payload = {
     flight: row.flightName,

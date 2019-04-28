@@ -86,8 +86,8 @@ router.post('/', (req, res) => {
     .substring(2)
 
   const payload = {
-    id: id,
-    event: body.event,
+    eventID: body.event,
+    flightID: id,
     flightName: body.flight.name,
     flightType: body.flight.type,
     flightAirpotDep: body.flight.airport.departure,

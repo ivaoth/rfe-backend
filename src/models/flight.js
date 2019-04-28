@@ -3,11 +3,11 @@ import Sequelize from 'sequelize'
 import sequelize from '../services/sequelize'
 
 const Flight = sequelize.define('flight', {
-  id: {
+  eventID: {
     type: Sequelize.STRING,
     allowNull: false,
   },
-  event: {
+  flightID: {
     type: Sequelize.STRING,
     allowNull: false,
   },

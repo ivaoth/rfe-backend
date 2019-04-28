@@ -18,7 +18,7 @@ router.get('/', async (req, res) => {
 
   rows.map(row => {
     events.push({
-      id: row.id,
+      id: row.eventID,
       name: row.eventName,
       desc: row.eventDesc,
       cover:  row.eventCover,

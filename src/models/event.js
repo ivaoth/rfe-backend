@@ -3,7 +3,7 @@ import Sequelize from 'sequelize'
 import sequelize from '../services/sequelize'
 
 const Event = sequelize.define('event', {
-  id: {
+  eventID: {
     type: Sequelize.STRING,
     allowNull: false,
     unique: true,
