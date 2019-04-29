@@ -113,7 +113,7 @@ Create flight slot
 | Property                 | Type   | Required | Description                   |
 | ------------------------ | ------ | -------- | ----------------------------- |
 | secret                   | String | Required | Secret key                    |
-| event                    | String | Required | Event ID                      |
+| event.id                 | String | Required | Event ID                      |
 | flight.name              | String | Required | Flight name                   |
 | flight.type              | String | Required | Flight aircraft               |
 | flight.airport.departure | String | Required | Flight airport departure ICAO |

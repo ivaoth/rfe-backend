@@ -16,7 +16,9 @@ router.post('/', (req, res, next) => {
    * Example:
    * {
    *   "secret": "somesecret",
-   *   "event": "eventid"
+   *   "event": {
+   *     "id": "eventid"
+   *   },
    *   "flight": {
    *     "name": "FD123",
    *     "type": "A320",
@@ -34,6 +36,7 @@ router.post('/', (req, res, next) => {
   if (
     !body.secret ||
     !body.event ||
+    !body.event.id ||
     !body.flight ||
     !body.flight.name ||
     !body.flight.type ||
@@ -74,9 +77,9 @@ router.post('/', (req, res, next) => {
 router.post('/', async (req, res, next) => {
   const {body} = req
 
-  const event = await Event.findAll({where: {eventID: body.event}})
+  const event = await Event.findOne({where: {eventID: body.event.id}})
 
-  if (event.length === 0) {
+  if (event.length === null) {
     return res.status(404).send({
       status: 'failure',
       code: 704,
@@ -97,7 +100,7 @@ router.post('/', async (req, res) => {
     .substring(2)
 
   const payload = {
-    eventID: body.event,
+    eventID: body.event.id,
     flightID: id,
     flightName: body.flight.name,
     flightType: body.flight.type,
