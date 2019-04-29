@@ -91,6 +91,35 @@ Remove event
 
 Returns a 200 HTTP status code and a JSON object.
 
+### Event/Toggle
+
+Toggle event to be available
+
+**HTTP Request**
+
+`POST /api/v1/event/toggle`
+
+**Request headers**
+
+| Request header | Description      |
+| -------------- | ---------------- |
+| Content-Type   | application/json |
+
+**Request body**
+
+| Property | Type   | Required | Description |
+| -------- | ------ | -------- | ----------- |
+| secret   | String | Required | Secret key  |
+| event.id | String | Required | Event ID    |
+
+**Response**
+
+Returns a 200 HTTP status code and a JSON object with the following data.
+
+| Property                   | Type   | Description     |
+| -------------------------- | ------ | --------------- |
+| response.data.event.isOpen | Array  | New event state |
+
 Flight
 ------
 
