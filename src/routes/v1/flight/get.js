@@ -7,7 +7,7 @@ const router = express.Router()
 router.get('/:evid/:id', async (req, res) => {
   const {evid, id} = req.params
 
-  const row = Flight.findOne({where: {eventID: evid, flightID: id}})
+  const row = await Flight.findOne({where: {eventID: evid, flightID: id}})
 
   const payload = {
     flight: row.flightName,
@@ -19,7 +19,12 @@ router.get('/:evid/:id', async (req, res) => {
     time: {
       departure: row.flightTimeDep,
     },
-    reserved: row.reserverVID !== null,
+    reserver:
+      row.reserverVID !== null
+        ? null
+        : {
+            vid: row.reserverVID,
+          },
   }
 
   res.status(200).send({
@@ -34,7 +39,7 @@ router.get('/:evid/:id', async (req, res) => {
   })
 })
 
-router.all('/', (req, res) => {
+router.all('/:evid/:id', (req, res) => {
   res.status(405).send({
     status: 'failure',
     code: 705,

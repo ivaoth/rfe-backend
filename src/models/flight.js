@@ -45,11 +45,11 @@ const Flight = sequelize.define('flight', {
     allowNull: true,
   },
   reserverRatingPilot: {
-    type: Sequelize.STRING,
+    type: Sequelize.INTEGER,
     allowNull: true,
   },
   reserverRatingATC: {
-    type: Sequelize.STRING,
+    type: Sequelize.INTEGER,
     allowNull: true,
   },
   reserverDivision: {

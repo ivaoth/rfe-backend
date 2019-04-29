@@ -7,9 +7,7 @@ const router = express.Router()
 router.get('/:evid/:page', async (req, res) => {
   const {evid, page} = req.params
 
-  const rows = Flight.findAll({attributes: ['flightID'], where: {eventID: evid}, limit: 50, offset: 50 * (page - 1)})
-
-  console.log(rows)
+  const rows = await Flight.findAll({attributes: ['flightID'], where: {eventID: evid}, limit: 50, offset: 50 * (page - 1)})
 
   const flights = []
 
@@ -29,7 +27,7 @@ router.get('/:evid/:page', async (req, res) => {
   })
 })
 
-router.all('/', (req, res) => {
+router.all('/:evid/:page', (req, res) => {
   res.status(405).send({
     status: 'failure',
     code: 705,

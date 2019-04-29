@@ -74,7 +74,7 @@ router.post('/', (req, res, next) => {
 router.post('/', async (req, res, next) => {
   const {body} = req
 
-  const event = await Event.findAll({where: {id: body.event}})
+  const event = await Event.findAll({where: {eventID: body.event}})
 
   if (event.length === 0) {
     return res.status(404).send({
