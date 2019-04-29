@@ -9,8 +9,6 @@ router.get('/:evid/:id', async (req, res) => {
 
   const row = await Flight.findOne({where: {eventID: evid, flightID: id}})
 
-  console.log(row.reserverVID)
-
   const payload = {
     flight: row.flightName,
     type: row.flightType,
