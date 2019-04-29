@@ -5,13 +5,11 @@ import Event from '../../../models/event'
 const router = express.Router()
 
 router.get('/', async (req, res) => {
-  const rows = Event.findAll({
+  const rows = await Event.findAll({
     where: {
       isOpen: true,
     },
   })
-
-  console.log(rows)
 
   const events = []
 

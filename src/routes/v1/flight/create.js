@@ -79,7 +79,7 @@ router.post('/', async (req, res, next) => {
 
   const event = await Event.findOne({where: {eventID: body.event.id}})
 
-  if (event.length === null) {
+  if (event === null) {
     return res.status(404).send({
       status: 'failure',
       code: 704,
