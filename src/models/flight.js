@@ -34,7 +34,6 @@ const Flight = sequelize.define('flight', {
   reserverVID: {
     type: Sequelize.STRING,
     allowNull: true,
-    unique: true,
   },
   reserverFirstName: {
     type: Sequelize.STRING,
