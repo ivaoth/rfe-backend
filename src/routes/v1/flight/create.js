@@ -115,7 +115,7 @@ router.post('/', async (req, res) => {
     flightID: id,
     flightName: body.flight.name,
     flightType: body.flight.type,
-    flightAirline: body.flight.airline,
+    flightAirline: body.flight.airline.code,
     flightDistance: body.flight.distance,
     flightAirpotDep: body.flight.airport.departure,
     flightAirportArr: body.flight.airport.arrival,

@@ -1,6 +1,7 @@
 import express from 'express'
 
 import Flight from '../../../models/flight'
+import Airline from '../../../models/airline'
 
 const router = express.Router()
 
@@ -9,11 +10,14 @@ router.get('/:evid/:id', async (req, res) => {
 
   const row = await Flight.findOne({where: {eventID: evid, flightID: id}})
 
+  const airline = await Airline.findOne({where: {airlineCode: row.flightAirline}})
+
   const payload = {
     flight: row.flightName,
     type: row.flightType,
     airline: {
-      code: row.flightAirline,
+      code: airline.airlineCode,
+      name: airline.airlineName,
     },
     distance: row.flightDistance,
     airport: {

@@ -56,8 +56,8 @@ router.post('/', async (req, res) => {
   const {body} = req
 
   const payload = {
-    airportDep: body.flight.name,
-    airportArr: body.flight.type,
+    airportDep: body.airport.departure,
+    airportArr: body.airport.arrival,
     route: body.route,
   }
 
@@ -71,6 +71,7 @@ router.post('/', async (req, res) => {
       },
     })
   } catch (err) {
+    console.log(err)
     return res.status(400).send({
       status: 'failure',
       code: 701,
