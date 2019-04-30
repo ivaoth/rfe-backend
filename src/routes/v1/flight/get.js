@@ -12,12 +12,16 @@ router.get('/:evid/:id', async (req, res) => {
   const payload = {
     flight: row.flightName,
     type: row.flightType,
+    airline: row.flightAirline,
+    distance: row.flightDistance,
     airport: {
       departure: row.flightAirpotDep,
       arrival: row.flightAirportArr,
     },
     time: {
       departure: row.flightTimeDep,
+      arrival: row.flightTimeArr,
+      total: row.flightTimeTotal,
     },
     reserver:
       row.reserverVID === null

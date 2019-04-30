@@ -20,14 +20,18 @@ router.post('/', (req, res, next) => {
    *     "id": "eventid"
    *   },
    *   "flight": {
-   *     "name": "FD123",
+   *     "name": "TG123",
    *     "type": "A320",
+   *     "airline": "THA",
+   *     "distance": 542
    *     "airport": {
    *       "departure": "VTBD",
    *       "arrival": "VTSG"
    *     },
    *     "time": {
-   *       "departure": "10:00"
+   *       "departure": "10:00",
+   *       "arrival": "11:00",
+   *       "total": "1:42"
    *     }
    *   }
    * }
@@ -40,11 +44,15 @@ router.post('/', (req, res, next) => {
     !body.flight ||
     !body.flight.name ||
     !body.flight.type ||
+    !body.flight.airline ||
+    !body.flight.distance ||
     !body.flight.airport ||
     !body.flight.airport.departure ||
     !body.flight.airport.arrival ||
     !body.flight.time ||
-    !body.flight.time.departure
+    !body.flight.time.departure ||
+    !body.flight.time.arrival ||
+    !body.flight.time.total
   ) {
     return res.status(400).send({
       status: 'failure',
@@ -104,9 +112,13 @@ router.post('/', async (req, res) => {
     flightID: id,
     flightName: body.flight.name,
     flightType: body.flight.type,
+    flightAirline: body.flight.airline,
+    flightDistance: body.flight.distance,
     flightAirpotDep: body.flight.airport.departure,
     flightAirportArr: body.flight.airport.arrival,
     flightTimeDep: body.flight.time.departure,
+    flightTimeArr: body.flight.time.arrival,
+    flightTimeTotal: body.flight.time.total,
     reserver: null,
   }
 
