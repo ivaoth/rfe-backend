@@ -1,7 +1,9 @@
 import express from 'express'
 
+import airlineRoutes from './airlineRoutes'
 import eventRoutes from './eventRoutes'
 import flightRoutes from './flightRoutes'
+import routeRoutes from './routeRoutes'
 import tokenRoutes from './tokenRoutes'
 
 const router = express.Router()
@@ -24,8 +26,10 @@ router.all('/', (req, res) => {
   })
 })
 
+router.use('/airline', airlineRoutes)
 router.use('/event', eventRoutes)
 router.use('/flight', flightRoutes)
+router.use('/route', routeRoutes)
 router.use('/token', tokenRoutes)
 
 export default router
