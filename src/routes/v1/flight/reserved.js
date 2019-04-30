@@ -21,9 +21,12 @@ router.get('/:vid', async (req, res) => {
         id: flight.flightID,
         flight: flight.flightName,
         type: flight.flightType,
-        airline: {
-          code: flight.flightAirline,
-        },
+        airline:
+          flight.flightAirline === null
+            ? null
+            : {
+                code: flight.flightAirline,
+              },
         distance: flight.flightDistance,
         airport: {
           departure: flight.flightAirpotDep,

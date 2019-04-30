@@ -21,7 +21,7 @@ const Flight = sequelize.define('flight', {
   },
   flightAirline: {
     type: Sequelize.STRING,
-    allowNull: false,
+    allowNull: true,
   },
   flightAirpotDep: {
     type: Sequelize.STRING,

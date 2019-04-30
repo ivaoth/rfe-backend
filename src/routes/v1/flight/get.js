@@ -10,15 +10,18 @@ router.get('/:evid/:id', async (req, res) => {
 
   const row = await Flight.findOne({where: {eventID: evid, flightID: id}})
 
-  const airline = await Airline.findOne({where: {airlineCode: row.flightAirline}})
+  const airline = row.flightAirline === null ? null : await Airline.findOne({where: {airlineCode: row.flightAirline}})
 
   const payload = {
     flight: row.flightName,
     type: row.flightType,
-    airline: {
-      code: airline.airlineCode,
-      name: airline.airlineName,
-    },
+    airline:
+      airline === null
+        ? null
+        : {
+            code: airline.airlineCode,
+            name: airline.airlineName,
+          },
     distance: row.flightDistance,
     airport: {
       departure: row.flightAirpotDep,
