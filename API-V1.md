@@ -8,13 +8,27 @@ Table of Contents
     *   [Create](#eventcreate)
     *   [List](#eventlist)
     *   [Remove](#eventremove)
+    *   [Toggle](#eventtoggle)
 
 *   [Flight](#flight)
     *   [Create](#flightcreate)
     *   [Remove](#flightremove)
     *   [List](#flightlist)
     *   [Get](#flightget)
-    *   [Reserve](#flight)
+    *   [Reserve](#flightreserve)
+    *   [Reserved](#flightreserved)
+    *   [Cancel](#flightcancel)
+
+*   [Airline](#airline)
+    *   [Create](#airlinecreate)
+    *   [Get](#airlineget)
+
+*  [Route](#route)
+    *   [Create](#routecreate)
+    *   [Get](#routeget)
+
+*   [Token](#token)
+    *   [Fetch](#tokenfetch)
 
 Event
 -----
@@ -145,9 +159,13 @@ Create flight slot
 | event.id                 | String | Required | Event ID                      |
 | flight.name              | String | Required | Flight name                   |
 | flight.type              | String | Required | Flight aircraft               |
+| flight.distance          | Number | Required | Flight distance               |
 | flight.airport.departure | String | Required | Flight airport departure ICAO |
 | flight.airport.arrival   | String | Required | Flight airport arrival ICAO   |
 | flight.time.departure    | String | Required | Flight departure time (UTC)   |
+| flight.time.arrival      | String | Required | Flight estimated arrival time |
+| flight.time.total        | String | Required | Flight estimated total time   |
+
 
 **Response**
 
@@ -252,9 +270,173 @@ Reserve flight
 | Property       | Type   | Required | Description                   |
 | -------------- | ------ | -------- | ----------------------------- |
 | event.id       | String | Required | Event ID                      |
-| flight.id      | String | Required | Flight name                   |
+| flight.id      | String | Required | Flight ID                     |
 | reserver.token | String | Required | Reserver's IVAO login token   |
 
 **Response**
 
 Returns a 200 HTTP status code and a JSON object.
+
+### Flight/Reserved
+
+List of flights that reserved by user (Limit at 50 records)
+
+**HTTP request**
+
+`GET /api/v1/flight/reserved/:vid`
+
+**Path parameters**
+
+| Parameter | Description |
+| --------- | ----------- |
+| vid       | User VID    |
+
+**Response**
+
+Returns a 200 HTTP status code and a JSON object.
+
+### Flight/Cancel
+
+Cancel reserved flight
+
+**HTTP request**
+
+`POST /api/v1/flight/cancel`
+
+**Request headers**
+
+| Request header | Description      |
+| -------------- | ---------------- |
+| Content-Type   | application/json |
+
+**Request body**
+
+| Property       | Type   | Required | Description                   |
+| -------------- | ------ | -------- | ----------------------------- |
+| token          | String | Required | User IVAOTOKEN                |
+| event.id       | String | Required | Event ID                      |
+| flight.id      | String | Required | Flight ID                     |
+
+Airline
+-------
+
+### Airline/Create
+
+Create airline record
+
+**HTTP request**
+
+`POST /api/v1/airline/create`
+
+**Request headers**
+
+| Request header | Description      |
+| -------------- | ---------------- |
+| Content-Type   | application/json |
+
+**Request body**
+
+| Property     | Type   | Required | Description  |
+| ------------ | ------ | -------- | ------------ |
+| secret       | String | Required | Secret key   |
+| airline.code | String | Required | Airline ICAO |
+| airline.name | String | Required | Airline name |
+
+**Response**
+
+Returns a 200 HTTP status code and a JSON object.
+
+### Airline/Get
+
+Get airline record
+
+**HTTP request**
+
+`GET /api/v1/airline/get/:code`
+
+**Path parameters**
+
+| Parameter | Description  |
+| --------- | ------------ |
+| code      | Airline ICAO |
+
+**Response**
+
+Returns a 200 HTTP status code and a JSON object with the following data.
+
+| Property                              | Type   | Description  |
+| ------------------------------------- | ------ | ------------ |
+| response.data.airline.code            | String | Airline ICAO |
+| response.data.airline.name            | String | Airline name |
+
+Route
+-----
+
+### Route/Create
+
+Create route record
+
+**HTTP request**
+
+`POST /api/v1/route/create`
+
+**Request headers**
+
+| Request header | Description      |
+| -------------- | ---------------- |
+| Content-Type   | application/json |
+
+**Request body**
+
+| Property          | Type   | Required | Description       |
+| ----------------- | ------ | -------- | ----------------- |
+| secret            | String | Required | Secret key        |
+| airport.departure | String | Required | Departure airport |
+| airport.arrival   | String | Required | Arrival airport   |
+| route             | String | Required | Flight route      |
+
+**Response**
+
+Returns a 200 HTTP status code and a JSON object.
+
+### Route/Get
+
+Get route record
+
+**HTTP request**
+
+`GET /api/v1/airline/route/:dep/:arr`
+
+**Path parameters**
+
+| Parameter | Description       |
+| --------- | ----------------- |
+| dep       | Departure airport |
+| arr       | Arrival airport   |
+
+**Response**
+
+Returns a 200 HTTP status code and a JSON object with the following data.
+
+| Property                              | Type   | Description       |
+| ------------------------------------- | ------ | ----------------- |
+| response.data.route.airport.departure | String | Departure airport |
+| response.data.route.airport.arrival   | String | Arrival airport   |
+| response.data.route.route             | String | Flight route      |
+
+Token
+-----
+
+### Token/Fetch
+
+Fetch token data from IVAO Login API
+
+**HTTP request**
+
+`GET /api/v1/token/fetch/:token`
+
+**Path parameters**
+
+| Parameter | Description |
+| --------- | ----------- |
+| token     | IVAOTOKEN   |
