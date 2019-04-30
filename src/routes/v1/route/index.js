@@ -7,7 +7,7 @@ router.get('/', (req, res) => {
     status: 'success',
     code: 201,
     response: {
-      message: 'hi from token',
+      message: 'hi from route',
     },
   })
 })
