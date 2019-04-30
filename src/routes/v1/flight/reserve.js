@@ -78,6 +78,14 @@ router.post('/', async (req, res) => {
             message: 'flight not found',
           },
         })
+      } else if (flight.reserverVID !== null) {
+        return res.status(404).send({
+          status: 'failure',
+          code: 706,
+          response: {
+            message: 'someone already reserved this flight',
+          },
+        })
       } else {
         const payload = {
           reserverVID: fetchToken.vid,
