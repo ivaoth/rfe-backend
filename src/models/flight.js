@@ -19,6 +19,10 @@ const Flight = sequelize.define('flight', {
     type: Sequelize.STRING,
     allowNull: false,
   },
+  flightAirline: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
   flightAirpotDep: {
     type: Sequelize.STRING,
     allowNull: false,
@@ -29,6 +33,18 @@ const Flight = sequelize.define('flight', {
   },
   flightTimeDep: {
     type: Sequelize.STRING,
+    allowNull: false,
+  },
+  flightTimeArr: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+  flightTimeTotal: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+  flightDistance: {
+    type: Sequelize.INTEGER,
     allowNull: false,
   },
   reserverVID: {
