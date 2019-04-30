@@ -22,8 +22,10 @@ router.post('/', (req, res, next) => {
    *   "flight": {
    *     "name": "TG123",
    *     "type": "A320",
-   *     "airline": "THA",
-   *     "distance": 542
+   *     "distance": 542,
+   *     "airline": {
+   *       "code": "THA"
+   *     },
    *     "airport": {
    *       "departure": "VTBD",
    *       "arrival": "VTSG"
@@ -44,8 +46,9 @@ router.post('/', (req, res, next) => {
     !body.flight ||
     !body.flight.name ||
     !body.flight.type ||
-    !body.flight.airline ||
     !body.flight.distance ||
+    !body.flight.airline ||
+    !body.flight.airline.code ||
     !body.flight.airport ||
     !body.flight.airport.departure ||
     !body.flight.airport.arrival ||
