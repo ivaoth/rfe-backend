@@ -15,6 +15,7 @@ router.get('/:evid/:id', async (req, res) => {
   const payload = {
     flight: row.flightName,
     type: row.flightType,
+    aircraft: row.flightAircraft,
     airline:
       airline === null
         ? null

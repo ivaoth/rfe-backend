@@ -15,7 +15,7 @@ const Flight = sequelize.define('flight', {
     type: Sequelize.STRING,
     allowNull: false,
   },
-  flightType: {
+  flightAircraft: {
     type: Sequelize.STRING,
     allowNull: false,
   },
@@ -54,6 +54,10 @@ const Flight = sequelize.define('flight', {
   flightBayArr: {
     type: Sequelize.STRING,
     allowNull: true,
+  },
+  flightType: {
+    type: Sequelize.STRING,
+    allowNull: false,
   },
   reserverVID: {
     type: Sequelize.STRING,

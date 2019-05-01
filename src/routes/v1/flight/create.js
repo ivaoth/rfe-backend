@@ -22,7 +22,8 @@ router.post('/', (req, res, next) => {
    *   },
    *   "flight": {
    *     "name": "TG123",
-   *     "type": "A320",
+   *     "type": "dep",
+   *     "aircraft": "A320",
    *     "distance": 542,
    *     "airline": {
    *       "code": "THA"
@@ -51,6 +52,7 @@ router.post('/', (req, res, next) => {
     !body.flight ||
     !body.flight.name ||
     !body.flight.type ||
+    !body.flight.aircraft ||
     !body.flight.distance ||
     !body.flight.airport ||
     !body.flight.airport.departure ||
@@ -117,7 +119,7 @@ router.post('/', async (req, res) => {
     eventID: body.event.id,
     flightID: id,
     flightName: body.flight.name,
-    flightType: body.flight.type,
+    flightAircraft: body.flight.type,
     flightAirline: !_.isEmpty(body.flight.airline.code) ? body.flight.airline.code : null,
     flightDistance: body.flight.distance,
     flightAirportDep: body.flight.airport.departure,

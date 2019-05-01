@@ -153,19 +153,20 @@ Create flight slot
 
 **Request body**
 
-| Property                 | Type   | Required | Description                   |
-| ------------------------ | ------ | -------- | ----------------------------- |
-| secret                   | String | Required | Secret key                    |
-| event.id                 | String | Required | Event ID                      |
-| flight.name              | String | Required | Flight name                   |
-| flight.type              | String | Required | Flight aircraft               |
-| flight.distance          | Number | Required | Flight distance               |
-| flight.airline.code      | String |          | Flight airline ICAO           |
-| flight.airport.departure | String | Required | Flight airport departure ICAO |
-| flight.airport.arrival   | String | Required | Flight airport arrival ICAO   |
-| flight.time.departure    | String | Required | Flight departure time (UTC)   |
-| flight.time.arrival      | String | Required | Flight estimated arrival time |
-| flight.time.total        | String | Required | Flight estimated total time   |
+| Property                 | Type   | Required | Description                       |
+| ------------------------ | ------ | -------- | --------------------------------- |
+| secret                   | String | Required | Secret key                        |
+| event.id                 | String | Required | Event ID                          |
+| flight.name              | String | Required | Flight name                       |
+| flight.type              | String | Required | Flight type (`dep`, `arr`, `pri`) |
+| flight.aircraft          | String | Required | Flight aircraft                   |
+| flight.distance          | Number | Required | Flight distance                   |
+| flight.airline.code      | String |          | Flight airline ICAO               |
+| flight.airport.departure | String | Required | Flight airport departure ICAO     |
+| flight.airport.arrival   | String | Required | Flight airport arrival ICAO       |
+| flight.time.departure    | String | Required | Flight departure time (UTC)       |
+| flight.time.arrival      | String | Required | Flight estimated arrival time     |
+| flight.time.total        | String | Required | Flight estimated total time       |
 
 
 **Response**
@@ -247,7 +248,7 @@ Returns a 200 HTTP status code and a JSON object with the following data.
 | Property                               | Type   | Description                   |
 | -------------------------------------- | ------ | ----------------------------- |
 | response.data.flight.flight            | String | Flight name                   |
-| response.data.flight.type              | String | Flight aircraft               |
+| response.data.flight.aircraft          | String | Flight aircraft               |
 | response.data.flight.airport.departure | String | Flight airport departure ICAO |
 | response.data.flight.airport.arrival   | String | Flight airport arrival ICAO   |
 | response.data.flight.time.departure    | String | Flight departure time (UTC)   |
