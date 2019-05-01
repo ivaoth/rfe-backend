@@ -118,8 +118,9 @@ router.post('/', async (req, res) => {
   const payload = {
     eventID: body.event.id,
     flightID: id,
+    flightType: body.flight.type,
     flightName: body.flight.name,
-    flightAircraft: body.flight.type,
+    flightAircraft: body.flight.aircraft,
     flightAirline: !_.isEmpty(body.flight.airline.code) ? body.flight.airline.code : null,
     flightDistance: body.flight.distance,
     flightAirportDep: body.flight.airport.departure,

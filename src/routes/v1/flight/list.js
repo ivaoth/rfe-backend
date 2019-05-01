@@ -7,12 +7,17 @@ const router = express.Router()
 router.get('/:evid/:page', async (req, res) => {
   const {evid, page} = req.params
 
-  const rows = await Flight.findAll({attributes: ['flightID'], where: {eventID: evid}, limit: 50, offset: 50 * (page - 1)})
+  const rows = await Flight.findAll({
+    attributes: ['flightID', 'flightType'],
+    where: {eventID: evid},
+    limit: 50,
+    offset: 50 * (page - 1),
+  })
 
   const flights = []
 
   rows.map(row => {
-    flights.push(row.flightID)
+    flights.push({id: row.flightID, type: row.flightType})
   })
 
   return res.status(200).send({
