@@ -29,7 +29,7 @@ router.get('/:vid', async (req, res) => {
               },
         distance: flight.flightDistance,
         airport: {
-          departure: flight.flightAirpotDep,
+          departure: flight.flightAirportDep,
           arrival: flight.flightAirportArr,
         },
         bay:
