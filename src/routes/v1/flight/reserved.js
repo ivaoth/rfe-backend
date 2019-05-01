@@ -32,6 +32,13 @@ router.get('/:vid', async (req, res) => {
           departure: flight.flightAirpotDep,
           arrival: flight.flightAirportArr,
         },
+        bay:
+          flight.flightBayDep === null || flight.flightBayArr === null
+            ? null
+            : {
+                departure: flight.flightBayDep,
+                arrival: flight.flightBayArr,
+              },
         time: {
           departure: flight.flightTimeDep,
           arrival: flight.flightTimeArr,

@@ -31,6 +31,10 @@ router.post('/', (req, res, next) => {
    *       "departure": "VTBD",
    *       "arrival": "VTSG"
    *     },
+   *     "bay": {
+   *       "departure": "210",
+   *       "arrival": "A24"
+   *     },
    *     "time": {
    *       "departure": "10:00",
    *       "arrival": "11:00",
@@ -116,8 +120,10 @@ router.post('/', async (req, res) => {
     flightType: body.flight.type,
     flightAirline: !_.isEmpty(body.flight.airline.code) ? body.flight.airline.code : null,
     flightDistance: body.flight.distance,
-    flightAirpotDep: body.flight.airport.departure,
+    flightAirportDep: body.flight.airport.departure,
     flightAirportArr: body.flight.airport.arrival,
+    flightBayDep: !_.isEmpty(body.flight.bay.departure) ? body.flight.bay.departure : null,
+    flightBayArr: !_.isEmpty(body.flight.bay.arrival) ? body.flight.bay.arrival : null,
     flightTimeDep: body.flight.time.departure,
     flightTimeArr: body.flight.time.arrival,
     flightTimeTotal: body.flight.time.total,
