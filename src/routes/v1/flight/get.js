@@ -28,7 +28,7 @@ router.get('/:evid/:id', async (req, res) => {
       arrival: row.flightAirportArr,
     },
     bay:
-      row.flightBayDep === null || row.flightBayArr === null
+      row.flightBayDep === null && row.flightBayArr === null
         ? null
         : {
             departure: row.flightBayDep,
