@@ -160,6 +160,7 @@ Create flight slot
 | flight.name              | String | Required | Flight name                   |
 | flight.type              | String | Required | Flight aircraft               |
 | flight.distance          | Number | Required | Flight distance               |
+| flight.airline.code      | String |          | Flight airline ICAO           |
 | flight.airport.departure | String | Required | Flight airport departure ICAO |
 | flight.airport.arrival   | String | Required | Flight airport arrival ICAO   |
 | flight.time.departure    | String | Required | Flight departure time (UTC)   |

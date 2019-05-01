@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import express from 'express'
 import dotenv from 'dotenv'
 
@@ -47,8 +48,6 @@ router.post('/', (req, res, next) => {
     !body.flight.name ||
     !body.flight.type ||
     !body.flight.distance ||
-    !body.flight.airline ||
-    !body.flight.airline.code ||
     !body.flight.airport ||
     !body.flight.airport.departure ||
     !body.flight.airport.arrival ||
@@ -115,7 +114,7 @@ router.post('/', async (req, res) => {
     flightID: id,
     flightName: body.flight.name,
     flightType: body.flight.type,
-    flightAirline: body.flight.airline.code,
+    flightAirline: !_.isEmpty(body.flight.airline.code) ? body.flight.airline.code : null,
     flightDistance: body.flight.distance,
     flightAirpotDep: body.flight.airport.departure,
     flightAirportArr: body.flight.airport.arrival,
