@@ -24,7 +24,7 @@ router.get('/:evid/:id', async (req, res) => {
           },
     distance: row.flightDistance,
     airport: {
-      departure: row.flightAirpotDep,
+      departure: row.flightAirportDep,
       arrival: row.flightAirportArr,
     },
     bay:
