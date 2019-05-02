@@ -20,7 +20,8 @@ router.post('/', (req, res, next) => {
    *     "reserver": {
    *       "token": "ivaotoken"
    *     }
-   *   }
+   *   },
+   *   "withRelated": false
    * }
    */
   if (
@@ -29,7 +30,8 @@ router.post('/', (req, res, next) => {
     !body.flight ||
     !body.flight.id ||
     !body.flight.reserver ||
-    !body.flight.reserver.token
+    !body.flight.reserver.token ||
+    (body.withRelated !== true && body.withRelated !== false)
   ) {
     return res.status(400).send({
       status: 'failure',
@@ -57,10 +59,10 @@ router.post('/', async (req, res) => {
       },
     })
   } else {
-    const dup = await Flight.findOne({where: {reserverVID: fetchToken.vid, eventID: body.event.id}})
+    const dups = await Flight.findAll({where: {reserverVID: fetchToken.vid, eventID: body.event.id}})
 
-    if (dup !== null) {
-      return res.status(401).send({
+    if (dups.length >= 2) {
+      return res.status(400).send({
         status: 'failure',
         code: 701,
         response: {
@@ -68,6 +70,20 @@ router.post('/', async (req, res) => {
         },
       })
     } else {
+      if (dups.length === 1) {
+        const relatedFlight = await Flight.findOne({where: {eventID: body.event.id, flightID: dups[0].relatedFlightID}})
+
+        if (dups[0].reserverVID !== fetchToken.vid || relatedFlight.flightID !== body.flight.id) {
+          return res.status(400).send({
+            status: 'failure',
+            code: 701,
+            response: {
+              message: 'this vid has already booked',
+            },
+          })
+        }
+      }
+
       const flight = await Flight.findOne({where: {eventID: body.event.id, flightID: body.flight.id}})
 
       if (flight === null) {
@@ -97,6 +113,31 @@ router.post('/', async (req, res) => {
         }
 
         await Flight.update(payload, {where: {eventID: body.event.id, flightID: body.flight.id}})
+
+        if (body.withRelated === true) {
+          const relatedFlight = await Flight.findOne({where: {eventID: body.event.id, flightID: flight.relatedFlightID}})
+
+          if (relatedFlight.reserverVID !== null && relatedFlight.reserverVID !== fetchToken.vid) {
+            return res.status(200).send({
+              status: 'success',
+              code: 202,
+              response: {
+                message: 'flight booked but related flight cannot be reserved because someone already reserved',
+              },
+            })
+          } else {
+            const payload = {
+              reserverVID: fetchToken.vid,
+              reserverFirstName: fetchToken.firstname,
+              reserverLastName: fetchToken.lastname,
+              reserverRatingPilot: fetchToken.ratingpilot,
+              reserverRatingATC: fetchToken.ratingatc,
+              reserverDivision: fetchToken.division,
+            }
+
+            await Flight.update(payload, {where: {eventID: body.event.id, flightID: flight.relatedFlightID}})
+          }
+        }
 
         return res.status(200).send({
           status: 'success',

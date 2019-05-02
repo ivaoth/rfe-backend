@@ -13,6 +13,7 @@ router.get('/:evid/:id', async (req, res) => {
   const airline = row.flightAirline === null ? null : await Airline.findOne({where: {airlineCode: row.flightAirline}})
 
   const payload = {
+    id: row.flightID,
     flight: row.flightName,
     type: row.flightType,
     aircraft: row.flightAircraft,
@@ -39,6 +40,9 @@ router.get('/:evid/:id', async (req, res) => {
       departure: row.flightTimeDep,
       arrival: row.flightTimeArr,
       total: row.flightTimeTotal,
+    },
+    related: {
+      id: row.relatedFlightID,
     },
     reserver:
       row.reserverVID === null

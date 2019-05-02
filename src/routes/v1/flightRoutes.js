@@ -8,6 +8,7 @@ import flightList from './flight/list'
 import flightRemove from './flight/remove'
 import flightReserve from './flight/reserve'
 import flightReserved from './flight/reserved'
+import flightRelated from './flight/related'
 
 const router = express.Router()
 
@@ -20,5 +21,6 @@ router.use('/get', flightGet)
 router.use('/remove', flightRemove)
 router.use('/reserve', flightReserve)
 router.use('/reserved', flightReserved)
+router.use('/related', flightRelated)
 
 export default router

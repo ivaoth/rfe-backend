@@ -17,6 +17,7 @@ Table of Contents
     *   [Get](#flightget)
     *   [Reserve](#flightreserve)
     *   [Reserved](#flightreserved)
+    *   [Related](#flightrelated)
     *   [Cancel](#flightcancel)
 
 *   [Airline](#airline)
@@ -247,11 +248,18 @@ Returns a 200 HTTP status code and a JSON object with the following data.
 
 | Property                               | Type   | Description                   |
 | -------------------------------------- | ------ | ----------------------------- |
+| response.data.flight.id                | String | Flight ID                     |
 | response.data.flight.flight            | String | Flight name                   |
+| response.data.flight.type              | String | Flight type                   |
 | response.data.flight.aircraft          | String | Flight aircraft               |
+| response.data.flight.bay.departure     | String | Flight departure bay          |
+| response.data.flight.bay.arrival       | String | Flight arrival bay            |
 | response.data.flight.airport.departure | String | Flight airport departure ICAO |
 | response.data.flight.airport.arrival   | String | Flight airport arrival ICAO   |
 | response.data.flight.time.departure    | String | Flight departure time (UTC)   |
+| response.data.flight.time.arrival      | String | Flight arrival time (UTC)     |
+| response.data.flight.time.total        | String | Total flight time             |
+| response.data.flight.related.id        | String | Related flight ID             |
 
 ### Flight/Reserve
 
@@ -269,11 +277,12 @@ Reserve flight
 
 **Request body**
 
-| Property       | Type   | Required | Description                   |
-| -------------- | ------ | -------- | ----------------------------- |
-| event.id       | String | Required | Event ID                      |
-| flight.id      | String | Required | Flight ID                     |
-| reserver.token | String | Required | Reserver's IVAO login token   |
+| Property              | Type    | Required | Description                                            |
+| --------------------- | ------- | -------- | ------------------------------------------------------ |
+| event.id              | String  | Required | Event ID                                               |
+| flight.id             | String  | Required | Flight ID                                              |
+| flight.reserver.token | String  | Required | Reserver's IVAO login token                            |
+| withRelated           | Boolean | Required | Set `true` if user also need to reserve related flight |
 
 **Response**
 
@@ -292,6 +301,33 @@ List of flights that reserved by user (Limit at 50 records)
 | Parameter | Description |
 | --------- | ----------- |
 | vid       | User VID    |
+
+**Response**
+
+Returns a 200 HTTP status code and a JSON object.
+
+### Flight/Related
+
+Set related flight
+
+**HTTP request**
+
+`POST /api/v1/flight/related`
+
+**Request headers**
+
+| Request header | Description      |
+| -------------- | ---------------- |
+| Content-Type   | application/json |
+
+**Request body**
+
+| Property  | Type    | Required | Description                                   |
+| --------- | ------- | -------- | --------------------------------------------- |
+| secret    | String  | Required | Secret key                                    |
+| event.id  | String  | Required | Event ID                                      |
+| flight.id | String  | Required | Flight ID                                     |
+| set       | Boolean | Required | Set `true` to set and set to `false` to unset |
 
 **Response**
 

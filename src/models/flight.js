@@ -59,6 +59,10 @@ const Flight = sequelize.define('flight', {
     type: Sequelize.STRING,
     allowNull: false,
   },
+  relatedFlightID: {
+    type: Sequelize.STRING,
+    allowNull: true,
+  },
   reserverVID: {
     type: Sequelize.STRING,
     allowNull: true,
