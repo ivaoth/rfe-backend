@@ -70,8 +70,22 @@ router.post('/', async (req, res) => {
         },
       })
     } else {
+      console.log(dups.length)
       if (dups.length === 1) {
+        if (dups[0].relatedFlightID === null) {
+          return res.status(400).send({
+            status: 'failure',
+            code: 701,
+            response: {
+              message: 'this vid has already booked',
+            },
+          })
+        }
+
         const relatedFlight = await Flight.findOne({where: {eventID: body.event.id, flightID: dups[0].relatedFlightID}})
+
+        console.log(dups[0].relatedFlightID)
+        console.log(relatedFlight === null)
 
         if (dups[0].reserverVID !== fetchToken.vid || relatedFlight.flightID !== body.flight.id) {
           return res.status(400).send({
