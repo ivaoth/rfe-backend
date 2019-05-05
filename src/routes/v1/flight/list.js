@@ -1,8 +1,27 @@
 import express from 'express'
 
+import Event from '../../../models/event'
 import Flight from '../../../models/flight'
 
 const router = express.Router()
+
+router.get('/:evid/:page', async (req, res, next) => {
+  const {evid} = req.params
+
+  const event = await Event.findOne({where: {eventID: evid, isOpen: true}})
+
+  if (event === null) {
+    res.status(400).send({
+      status: 'failure',
+      code: 706,
+      response: {
+        message: 'event is closed for reservation',
+      },
+    })
+  } else {
+    next()
+  }
+})
 
 router.get('/:evid/:page', async (req, res) => {
   const {evid, page} = req.params
