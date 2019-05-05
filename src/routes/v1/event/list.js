@@ -19,6 +19,10 @@ router.get('/', async (req, res) => {
       name: row.eventName,
       desc: row.eventDesc,
       cover: row.eventCover,
+      breifing: {
+        pilot: row.eventBreifingPilot,
+        atc: row.eventBreifingATC,
+      },
     })
   })
 

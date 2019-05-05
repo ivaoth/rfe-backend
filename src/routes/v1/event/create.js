@@ -63,6 +63,8 @@ router.post('/', async (req, res) => {
     eventName: body.event.name,
     eventDesc: body.event.desc,
     eventCover: body.event.cover,
+    eventBreifingPilot: body.event.breifing.pilot || null,
+    eventBreifingATC: body.event.breifing.atc || null,
     isOpen: false,
   }
 

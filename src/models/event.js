@@ -22,6 +22,20 @@ const Event = sequelize.define('event', {
       isUrl: true,
     },
   },
+  eventBreifingPilot: {
+    type: Sequelize.TEXT,
+    allowNull: true,
+    validate: {
+      isUrl: true,
+    },
+  },
+  eventBreifingATC: {
+    type: Sequelize.TEXT,
+    allowNull: true,
+    validate: {
+      isUrl: true,
+    },
+  },
   isOpen: {
     type: Sequelize.BOOLEAN,
     allowNull: false,

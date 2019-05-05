@@ -51,6 +51,10 @@ router.get('/:vid', async (req, res) => {
         name: event.eventName,
         desc: event.eventDesc,
         cover: event.eventCover,
+        breifing: {
+          pilot: event.eventBreifingPilot,
+          atc: event.eventBreifingATC,
+        },
         isOpen: event.isOpen,
       },
     })

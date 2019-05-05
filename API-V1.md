@@ -7,6 +7,7 @@ Table of Contents
 *   [Event](#event)
     *   [Create](#eventcreate)
     *   [List](#eventlist)
+    *   [Get](#eventget)
     *   [Remove](#eventremove)
     *   [Toggle](#eventtoggle)
 
@@ -50,12 +51,14 @@ Create event
 
 **Request body**
 
-| Property    | Type   | Required | Description       |
-| ----------- | ------ | -------- | ----------------- |
-| secret      | String | Required | Secret key        |
-| event.name  | String | Required | Event name        |
-| event.desc  | String | Required | Event description |
-| event.cover | String | Required | Cover URL         |
+| Property             | Type   | Required | Description             |
+| -------------------- | ------ | -------- | ----------------------- |
+| secret               | String | Required | Secret key              |
+| event.name           | String | Required | Event name              |
+| event.desc           | String | Required | Event description       |
+| event.cover          | String | Required | Cover URL               |
+| event.breifing.pilot | String |          | Pilot breifing docs URL |
+| event.breifing.atc   | String |          | ATC breifing docs URL   |
 
 **Response**
 
@@ -80,6 +83,24 @@ Returns a 200 HTTP status code and a JSON object with the following data.
 | Property             | Type   | Description     |
 | -------------------- | ------ | --------------- |
 | response.data.events | Array  | Array of events |
+
+### Event/Get
+
+Get event detail by ID
+
+**HTTP Request**
+
+`GET /api/v1/event/get/:evid`
+
+**Path parameters**
+
+| Parameter | Description |
+| --------- | ----------- |
+| evid      | Event ID    |
+
+**Response**
+
+Returns a 200 HTTP status code and a JSON object.
 
 ### Event/Remove
 
